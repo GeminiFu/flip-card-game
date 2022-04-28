@@ -30,3 +30,10 @@ body {
   grid-template-columns: repeat(13, 1fr);
   grid-template-rows: repeat(4, 1fr);
 }
+
+.thanks {
+  position: absolute;
+  bottom: 0;
+  right: 30px;
+  color: rgba(128, 128, 128, 0.432);
+}
