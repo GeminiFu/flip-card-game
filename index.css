@@ -1,7 +1,22 @@
+:root {
+  --hide-color: aqua;
+  --show-color-text: black;
+}
+
+
+
 .card {
   width: 100px;
   height: 100px;
-  background-color: aqua;
+}
+
+.hide {
+  background-color: var(--hide-color);
+  color: var(--hide-color);
+}
+
+.show {
+  color: var(--show-color-text);
 }
 
 #cards-container {
