@@ -13,42 +13,34 @@ function Card(cardIndex) {
   const that = this
   const Id = cardIndex
 
-  console.log(that)
-
   // 產生卡片在 HTML
-  that.generator = function () {
-    cardsContainer.innerHTML += `
-      <div class="card""></div>
-    `
-    const cardDom = document.getElementsByClassName('card')[Id]
+  that.creatElement = function () {
+    const element = document.createElement('div')
 
-    cardDom.dataset.index = Id
+    that.addClass(element, 'card')
 
-    that.clickEvent(cardDom)
+    that.clickEvent(element)
+
+    return element
   }
 
-
   // 卡片點擊事件
-  that.clickEvent = function (card) {
-    card.addEventListener('click', () => {
-      if (!card.dataset.cardId) {
-        card.dataset.cardId = randomCard()
-      }
-      // console.log(cardStack)
-      console.log(card.dataset.cardId)
-      // console.dir(card)
+  that.clickEvent = function (dom) {
+    dom.addEventListener('click', () => {
+      console.log('clicked')
     })
+  }
+
+  // 卡片設定class
+  that.addClass = function (element, className) {
+    element.classList.add(className)
+    // console.log(element.classList)
   }
 }
 
-const cardNewStack = {}
-
 for (let i = 0; i < 52; i++) {
-  const card = new Card(i)
-  card.generator()
-
-  cardNewStack[i] = document.getElementsByClassName('card')[i]
-
+  const card = new Card
+  cardsContainer.appendChild(card.creatElement())
 }
 
 
