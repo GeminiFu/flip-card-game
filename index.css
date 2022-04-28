@@ -1,22 +1,25 @@
 :root {
+  --card-height: 100px;
   --hide-color: aqua;
   --show-color-text: black;
 }
 
-
+body {
+  margin: 0;
+}
 
 .card {
-  width: 100px;
-  height: 100px;
+  width: calc(var(--card-height) * 0.75);
+  height: var(--card-height);
 }
 
 .hide {
-  background-color: var(--hide-color);
-  color: var(--hide-color);
+  /* background-color: var(--hide-color); */
+  /* color: var(--hide-color); */
 }
 
 .show {
-  color: var(--show-color-text);
+  /* color: var(--show-color-text); */
 }
 
 #cards-container {

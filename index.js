@@ -1,9 +1,11 @@
 const cardStack = {
-  0: ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'],
-  1: ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'],
-  2: ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'],
-  3: ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'],
+  0: ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'j', 'q', 'k'],
+  1: ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'j', 'q', 'k'],
+  2: ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'j', 'q', 'k'],
+  3: ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'j', 'q', 'k'],
 }
+
+
 
 
 const cardsContainer = document.getElementById('cards-container')
@@ -13,12 +15,20 @@ let playerClickedElement = []
 function Card(cardIndex) {
   const that = this
   const Id = cardIndex
+  const suitsStack = {
+    0: 'spades',
+    1: 'hearts',
+    2: 'diamonds',
+    3: 'clubs',
+  }
 
   // 產生卡片在 HTML
   that.createElement = function () {
     const element = document.createElement('div')
 
-    that.addClass(element, 'card', 'hide')
+    that.addClass(element, 'card')
+
+    that.renderFoldCard(element)
 
     that.giveCard(element)
 
@@ -55,7 +65,7 @@ function Card(cardIndex) {
 
     if (card1.dataset.number !== card2.dataset.number) {
       playerClickedElement.forEach((element) => {
-        that.renderFoldCard(element)
+        setTimeout(() => { that.renderFoldCard(element) }, 500)
       })
     }
 
@@ -72,23 +82,25 @@ function Card(cardIndex) {
     element.dataset.number = number
   }
 
-  // TODO: 翻開卡片渲染
+  // 翻開卡片渲染
   that.renderFlipCard = function (element) {
-    const suit = element.dataset.suit
+    const suit = suitsStack[element.dataset.suit]
     const number = element.dataset.number
 
     element.classList.remove('hide')
     element.classList.add('show')
 
-    element.innerHTML = `<p>suit is ${suit}, number is ${number}</p>`
+    element.style.background = `url(${Poker.getCardData(100, suit, number)})`
   }
 
-  // 蓋起卡片渲染
+  // TODO: 蓋起卡片渲染
   that.renderFoldCard = function (element) {
 
     element.classList.remove('show')
     element.classList.add('hide')
-    element.innerHTML = ``
+
+    element.style.background = `url(${Poker.getBackData(100, '#b55', '#a22')})`
+
   }
 
   // 卡片設定class
@@ -171,21 +183,6 @@ function isStackHasCard() {
 
   return 0
 }
-
-
-
-
-window.addEventListener('click', () => {
-  // const card = randomCard()
-
-  // console.log('card is ', card)
-
-
-  // console.log('cardStack is ', cardStack)
-})
-
-
-
 
 
 // ------------------------------------------------------------------------------------------------------
